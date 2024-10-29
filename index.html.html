@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест для самопроверки СДВГ</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+        input[type="number"] {
+            width: 60px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #e6f7ff;
+            text-align: center;
+        }
+        .instructions {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #0066cc;
+            text-align: center;
+            border: 1px solid #0066cc;
+            padding: 10px;
+            border-radius: 4px;
+            background-color: #f0f8ff;
+            display: none;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 1em;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>ADHD Self-Assessment Test</h1>
+    <p class="instructions">Ответьте на каждый вопрос от 1 (никогда) до 5 (очень часто):</p>
+
+    <label for="q1">1. Легко ли вам отвлечься на посторонние раздражители?</label>
+    <input type="number" id="q1" min="1" max="5">
+
+    <label for="q2">2. Часто ли вы забываете делать важные дела?</label>
+    <input type="number" id="q2" min="1" max="5">
+
+    <label for="q3">3. Трудно ли вам удерживать внимание на задачах?</label>
+    <input type="number" id="q3" min="1" max="5">
+
+    <label for="q4">4. Часто ли вам становится скучно выполнять рутинные задачи?</label>
+    <input type="number" id="q4" min="1" max="5">
+
+    <label for="q5">5. Возникают ли у вас трудности с завершением начатого?</label>
+    <input type="number" id="q5" min="1" max="5">
+
+    <label for="q6">6. Сложно ли вам организовывать свои задачи?</label>
+    <input type="number" id="q6" min="1" max="5">
+
+    <label for="q7">7. Бывает ли, что вы говорите или действуете импульсивно?</label>
+    <input type="number" id="q7" min="1" max="5">
+
+    <label for="q8">8. Часто ли вы чувствуете беспокойство или неугомонность?</label>
+    <input type="number" id="q8" min="1" max="5">
+
+    <label for="q9">9. Возникают ли у вас проблемы с самоконтролем?</label>
+    <input type="number" id="q9" min="1" max="5">
+
+    <label for="q10">10. Часто ли вы забываете детали или теряете предметы?</label>
+    <input type="number" id="q10" min="1" max="5">
+
+    <button onclick="calculateResult()">Показать результат</button>
+
+    <div id="result"></div>
+
+    <script>
+        function calculateResult() {
+            const questions = [q1, q2, q3, q4, q5, q6, q7, q8, q9, q10];
+            let sum = 0;
+            let valid = true;
+
+            questions.forEach((q) => {
+                const value = parseInt(q.value);
+                if (isNaN(value) || value < 1 || value > 5) {
+                    valid = false;
+                } else {
+                    sum += value;
+                }
+            });
+
+            const resultDiv = document.getElementById('result');
+            if (valid) {
+                if (sum <= 20) {
+                    resultDiv.textContent = "Ваши результаты низкие. Вероятно, СДВГ у вас отсутствует.";
+                } else if (sum <= 35) {
+                    resultDiv.textContent = "Ваши результаты средние. Возможно, у вас есть некоторые черты СДВГ.";
+                } else {
+                    resultDiv.textContent = "Ваши результаты высокие. Рекомендуется обратиться к специалисту для точной диагностики.";
+                }
+                resultDiv.style.display = 'block';
+            } else {
+                resultDiv.textContent = "Пожалуйста, введите значения от 1 до 5 для всех вопросов.";
+                resultDiv.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
+
